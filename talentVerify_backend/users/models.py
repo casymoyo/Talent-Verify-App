@@ -7,7 +7,7 @@ class User(AbstractUser):
         ('Employee', 'Employee'),
         ('Support', 'Support')
     ]
-    role = models.CharField(max_length='20', choices=role_choices)
+    role = models.CharField(max_length=20, choices=role_choices)
     profile_image = models.ImageField(upload_to='Profile_images', blank=True, null=True)
     
     def __str__(self):
