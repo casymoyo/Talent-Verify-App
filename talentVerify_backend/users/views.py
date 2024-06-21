@@ -6,16 +6,18 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 
 class UserView(APIView):
-    def get(self, request):
-        users = User.objects.all()
-        serializer = User(serializer, many=True)
-        return users
     
-    def get(self, request, pk):
-        try:
-            return User.objects.get(pk=pk)
-        except User.DoesNotExist:
-            return Response(status=404)
+    def get(self, request, pk=None):
+        if pk:
+            try:
+                user = User.objects.get(pk=pk)
+                serializer = UserSerializer(user)
+            except User.DoesNotExist:
+                return Response(status=404)
+        else:
+            users = User.objects.all()
+            serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
         
     def post(self, request):
         serializer = UserSerializer(data=request.data)
