@@ -1,10 +1,11 @@
+import magic 
+import pandas as pd  
+from openpyxl import load_workbook   
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import FileUploadParser
 from .models import Department, Company, Role, Employee
-import magic  
-from openpyxl import load_workbook  
-import pandas as pd  
+
 
 class EmployeeUploadView(APIView):
     parser_classes = [FileUploadParser]  
